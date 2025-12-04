@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Oil in the UAE – Kids & Adults Learning Site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    :root {
+      --kids-primary: #ffb703;
+      --kids-accent: #f72585;
+      --kids-bg: #fff4d6;
+      --adult-primary: #0f4c75;
+      --adult-accent: #3282b8;
+      --bg: #f5f7fa;
+      --card-bg: #ffffff;
+      --text-main: #222222;
+      --text-muted: #666666;
+      --radius-lg: 18px;
+      --shadow-soft: 0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #e0fbff 0, #f5f7fa 45%, #f5f7fa 100%);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 1.6rem 1rem 0.6rem;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      margin-bottom: 0.3rem;
+    }
+
+    header p {
+      max-width: 720px;
+      margin: 0 auto;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto 3rem;
+      padding: 1rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 1.1rem 1.3rem;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(15, 76, 117, 0.06);
+      margin-bottom: 1.2rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.6rem 1.3rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s;
+    }
+
+    .btn span.icon {
+      margin-left: 0.4rem;
+    }
+
+    .btn-kids {
+      background: linear-gradient(135deg, var(--kids-primary), var(--kids-accent));
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(247, 37, 133, 0.4);
+    }
+
+    .btn-adults {
+      background: linear-gradient(135deg, var(--adult-primary), var(--adult-accent));
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(15, 76, 117, 0.35);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid rgba(0,0,0,0.2);
+      color: var(--text-main);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 7px 18px rgba(0,0,0,0.14);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+    }
+
+    #age-gate {
+      margin-top: 1.5rem;
+      text-align: center;
+    }
+
+    .age-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.3rem;
+      margin-top: 1.2rem;
+    }
+
+    .age-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .age-card.kids {
+      background: radial-gradient(circle at top left, #ffe9b5, #ffe5f3);
+      border-top: 4px solid var(--kids-primary);
+    }
+
+    .age-card.adults {
+      background: radial-gradient(circle at top left, #d7ecff, #f7fbff);
+      border-top: 4px solid var(--adult-primary);
+    }
+
+    .age-label {
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+      font-size: 1.15rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .age-label span.icon-big {
+      font-size: 1.4rem;
+      animation: floaty 2.4s ease-in-out infinite;
+    }
+
+    @keyframes floaty {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+      100% { transform: translateY(0); }
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.8rem;
+      margin: 1.6rem 0 1rem;
+    }
+
+    .section-header h2 {
+      font-size: 1.8rem;
+    }
+
+    .section-tagline {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.2rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .pill-kids {
+      background: rgba(255, 183, 3, 0.2);
+      color: #9f5600;
+    }
+
+    .pill-adults {
+      background: rgba(15, 76, 117, 0.1);
+      color: #0f4c75;
+    }
+
+    /* Kids layout tweaks */
+    #kids-section {
+      background: linear-gradient(180deg, var(--kids-bg), #fdfbff);
+      border-radius: 22px;
+      padding: 1rem 1rem 1.3rem;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+      margin-top: 1rem;
+    }
+
+    .kids-three-column {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 0.8rem;
+      margin-top: 0.7rem;
+    }
+
+    .kids-story-card {
+      border-radius: 14px;
+      padding: 0.7rem 0.8rem;
+      background: #fffdf5;
+      border: 1px solid rgba(255, 183, 3, 0.7);
+      font-size: 0.9rem;
+    }
+
+    .kids-story-card h3 {
+      margin-bottom: 0.35rem;
+      font-size: 1rem;
+    }
+
+    .kids-story-card h3 span {
+      margin-right: 0.25rem;
+    }
+
+    /* Photo / video style */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 0.9rem;
+      margin-top: 0.6rem;
+    }
+
+    .video-card {
+      border-radius: 16px;
+      overflow: hidden;
+      background: #000;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+    }
+
+    .video-card iframe {
+      width: 100%;
+      border: 0;
+      aspect-ratio: 16 / 9;
+      display: block;
+    }
+
+    .video-caption {
+      padding: 0.5rem 0.7rem 0.7rem;
+      background: #040816;
+      color: #f3f5ff;
+      font-size: 0.8rem;
+    }
+
+    /* Virtual tour */
+    .tour-frame {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+      border: 2px solid rgba(33, 158, 188, 0.6);
+    }
+
+    .tour-frame iframe {
+      width: 100%;
+      height: 320px;
+      border: 0;
+    }
+
+    /* Mini games */
+    .timeline-game {
+      margin-top: 0.6rem;
+      font-size: 0.9rem;
+    }
+
+    #timeline-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 0.4rem;
+    }
+
+    #timeline-list li {
+      background: #ffffff;
+      border-radius: 999px;
+      padding: 0.4rem 0.8rem;
+      margin-bottom: 0.3rem;
+      border: 1px solid rgba(0,0,0,0.08);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+      cursor: grab;
+      font-size: 0.85rem;
+    }
+
+    #timeline-list li.dragging {
+      opacity: 0.6;
+      border-style: dashed;
+      cursor: grabbing;
+    }
+
+    .timeline-message {
+      margin-top: 0.3rem;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+
+    .fun-facts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 0.6rem;
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .fun-fact {
+      border-radius: 14px;
+      padding: 0.6rem 0.7rem;
+      background: #e8fbff;
+      border: 1px dashed rgba(33, 158, 188, 0.9);
+      cursor: pointer;
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
+    }
+
+    .fun-fact:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+    }
+
+    /* Quizzes */
+    .quiz {
+      margin-top: 0.6rem;
+      font-size: 0.9rem;
+    }
+
+    .quiz-question {
+      margin-bottom: 0.7rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px dashed rgba(0,0,0,0.08);
+    }
+
+    .quiz-question:last-child {
+      border-bottom: none;
+    }
+
+    .quiz-question p {
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+
+    .quiz-option {
+      display: block;
+      margin: 0.1rem 0;
+      cursor: pointer;
+    }
+
+    .quiz-result {
+      margin-top: 0.4rem;
+      font-weight: 600;
+    }
+
+    /* Adult layout */
+    #adults-section {
+      margin-top: 1rem;
+    }
+
+    .adult-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 1rem;
+    }
+
+    @media (max-width: 850px) {
+      .adult-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .resource-list {
+      list-style: disc;
+      padding-left: 1.2rem;
+      font-size: 0.92rem;
+      margin-top: 0.3rem;
+    }
+
+    .resource-list a {
+      color: var(--adult-accent);
+      text-decoration: none;
+    }
+
+    .resource-list a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      padding: 0 1rem 1.6rem;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Oil in the UAE: Past, Discovery & Today</h1>
+    <p>
+      Learn how the UAE changed from small coastal towns and pearl divers
+      into a modern country, thanks to the discovery of oil – with a fun kids zone
+      and a deeper adult zone.
+    </p>
+  </header>
+
+  <main>
+    <!-- AGE GATE -->
+    <section id="age-gate">
+      <div class="card">
+        <p>Who is exploring today?</p>
+        <div class="age-cards">
+          <article class="card age-card kids">
+            <div class="pill pill-kids">For Kids</div>
+            <div class="age-label">
+              Kids Zone (7–13) <span class="icon-big">🌈</span>
+            </div>
+            <p style="font-size:0.9rem;">
+              Short story, museum virtual tour, mini games, videos and fun facts.
+            </p>
+            <button class="btn btn-kids" id="kids-btn">
+              Enter Kids Zone <span class="icon">🎮</span>
+            </button>
+          </article>
+
+          <article class="card age-card adults">
+            <div class="pill pill-adults">For Teens & Adults</div>
+            <div class="age-label">
+              Adult Zone <span class="icon-big">📘</span>
+            </div>
+            <p style="font-size:0.9rem;">
+              A clearer look at oil discovery, its impact on the UAE, and links
+              to real archives, articles and short videos.
+            </p>
+            <button class="btn btn-adults" id="adults-btn">
+              Enter Adult Zone <span class="icon">➡️</span>
+            </button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- KIDS SECTION -->
+    <section id="kids-section" class="hidden">
+      <div class="section-header">
+        <div>
+          <div class="pill pill-kids">Kids Zone</div>
+          <h2>UAE Story: Before Oil, Discovery & Today</h2>
+          <p class="section-tagline">
+            Read a short story, wander through a museum, play games and watch videos.
+          </p>
+        </div>
+        <button class="btn btn-outline" id="back-from-kids">⬅ Back</button>
+      </div>
+
+      <!-- Short story -->
+      <section class="card">
+        <h3>1. Short Story of the UAE 🏝️🛢️🏙️</h3>
+        <div class="kids-three-column">
+          <div class="kids-story-card">
+            <h3><span>🏝️</span>Before Oil</h3>
+            <p>
+              Long ago, many people in the UAE lived in small towns by the sea.
+              They went fishing, dived for pearls, and traded on wooden boats.
+              Houses were simple, streets were sandy and there were no skyscrapers yet.
+            </p>
+          </div>
+          <div class="kids-story-card">
+            <h3><span>🛢️</span>Discovery of Oil</h3>
+            <p>
+              In the 1950s, teams came to the desert to search for oil under the ground
+              and under the sea. They drilled deep wells and finally found oil in
+              commercial amounts. Big metal rigs and pipelines appeared in the desert.
+              This was the start of a big change.
+            </p>
+          </div>
+          <div class="kids-story-card">
+            <h3><span>🏙️</span>After Oil – Today</h3>
+            <p>
+              Money from oil helped build roads, schools, hospitals and airports.
+              Small towns grew into modern cities like Abu Dhabi and Dubai. Today,
+              the UAE also uses solar power and thinks about a future beyond oil.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Virtual tour -->
+      <section class="card">
+        <h3>2. Virtual Museum Tour 🏛️</h3>
+        <p style="font-size:0.9rem; margin-bottom:0.4rem;">
+          Take a 360° look inside Sharjah Museums. Click and drag to look around – it’s like
+          walking inside a real museum on your screen!
+        </p>
+        <div class="tour-frame">
+          <iframe
+            src="https://360emirates.com/sharjah/360-virtual-tour/sharjah_museums/"
+            title="Sharjah Museums Virtual Tour"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </section>
+
+      <!-- Mini games -->
+      <section class="card">
+        <h3>3. Mini Games 🎲</h3>
+
+        <!-- Timeline game -->
+        <div class="timeline-game">
+          <h4>Timeline Mix-Up ⏱️</h4>
+          <p style="font-size:0.9rem;">
+            Drag the cards into the correct order (from oldest to newest).
+          </p>
+          <ul id="timeline-list">
+            <li draggable="true" data-order="3">
+              Big modern cities with tall towers.
+            </li>
+            <li draggable="true" data-order="1">
+              Small fishing and pearl-diving towns.
+            </li>
+            <li draggable="true" data-order="2">
+              Oil is discovered and rigs appear in the desert.
+            </li>
+          </ul>
+          <button class="btn btn-kids" id="check-timeline" style="margin-top:0.3rem;">
+            Check my order ✅
+          </button>
+          <div id="timeline-message" class="timeline-message"></div>
+        </div>
+
+        <!-- Quick quiz -->
+        <div class="quiz" id="kids-quiz" style="margin-top:0.9rem;">
+          <h4>Quick Quiz 🎯</h4>
+          <div class="quiz-question" data-answer="b">
+            <p>1. Before oil, many people in the UAE worked in:</p>
+            <label class="quiz-option">
+              <input type="radio" name="kq1" value="a" /> Building skyscrapers
+            </label>
+            <label class="quiz-option">
+              <input type="radio" name="kq1" value="b" /> Fishing and pearl diving
+            </label>
+            <label class="quiz-option">
+              <input type="radio" name="kq1" value="c" /> Making video games
+            </label>
+          </div>
+
+          <div class="quiz-question" data-answer="c">
+            <p>2. Oil money helped the UAE to build:</p>
+            <label class="quiz-option">
+              <input type="radio" name="kq2" value="a" /> Only football stadiums
+            </label>
+            <label class="quiz-option">
+              <input type="radio" name="kq2" value="b" /> Only farms
+            </label>
+            <label class="quiz-option">
+              <input type="radio" name="kq2" value="c" /> Roads, schools and hospitals
+            </label>
+          </div>
+
+          <div class="quiz-question" data-answer="a">
+            <p>3. Today the UAE also uses:</p>
+            <label class="quiz-option">
+              <input type="radio" name="kq3" value="a" /> Solar and clean energy
+            </label>
+            <label class="quiz-option">
+              <input type="radio" name="kq3" value="b" /> Only candles
+            </label>
+            <label class="quiz-option">
+              <input type="radio" name="kq3" value="c" /> No electricity
+            </label>
+          </div>
+
+          <button class="btn btn-kids" id="kids-quiz-submit" style="margin-top:0.3rem;">
+            Check my answers
+          </button>
+          <div id="kids-quiz-result" class="quiz-result"></div>
+        </div>
+
+        <!-- Fun facts -->
+        <div style="margin-top:1rem;">
+          <h4>Tap for Fun Facts 💡</h4>
+          <p style="font-size:0.85rem;">Click each box to reveal a short fact.</p>
+          <div class="fun-facts-grid">
+            <div class="fun-fact" data-front="Pearls & sea" data-back="Before oil, pearls from the Gulf were one of the region’s most important exports.">
+              🐚 Tap to reveal
+            </div>
+            <div class="fun-fact" data-front="Oil & schools" data-back="Oil money helped pay for free schools and universities in the UAE.">
+              🏫 Tap to reveal
+            </div>
+            <div class="fun-fact" data-front="Desert rigs" data-back="Oil wells can reach thousands of metres underground to reach the oil.">
+              🏜️ Tap to reveal
+            </div>
+            <div class="fun-fact" data-front="Solar future" data-back="The UAE also builds huge solar parks to get clean energy from the sun.">
+              ☀️ Tap to reveal
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Kids videos -->
+      <section class="card">
+        <h3>4. Short Videos 🎥</h3>
+        <p style="font-size:0.9rem;">
+          You can watch these with a parent or teacher to learn more about the UAE and its history.
+        </p>
+        <div class="video-grid">
+          <div class="video-card">
+            <iframe
+              src="https://www.youtube.com/embed/mYj4W6Ijv_8"
+              title="Explore UAE History, Culture, and Landmarks for Kids"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+            <div class="video-caption">
+              Virtual tour-style video for kids about UAE history, culture and landmarks.
+            </div>
+          </div>
+
+          <div class="video-card">
+            <iframe
+              src="https://www.youtube.com/embed/H4po42yu06E"
+              title="Exploring Sharjah Archaeology Museum with Kids"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+            <div class="video-caption">
+              A family visit to a Sharjah museum, showing real artefacts and exhibits.
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- ADULT SECTION -->
+    <section id="adults-section" class="hidden">
+      <div class="section-header">
+        <div>
+          <div class="pill pill-adults">Adult Zone</div>
+          <h2>Oil in the UAE – A Deeper Look</h2>
+          <p class="section-tagline">
+            How did the discovery of oil transform the UAE, and where can you explore more?
+          </p>
+        </div>
+        <button class="btn btn-outline" id="back-from-adults">⬅ Back</button>
+      </div>
+
+      <div class="adult-grid">
+        <!-- Text / story column -->
+        <article class="card">
+          <h3>From Pearls and Trading Ports to Oil Producers</h3>
+          <p>
+            Before oil, the emirates along the southern Gulf coast relied on fishing,
+            pearling, small-scale trade and oasis agriculture. Towns such as Abu Dhabi
+            and Dubai were modest settlements clustered around creeks or coastal inlets.
+            Life was shaped by the sea, the desert and seasonal pearl-diving campaigns.
+          </p>
+
+          <p style="margin-top:0.4rem;">
+            In the early 20th century, foreign oil companies began conducting geological
+            surveys and signing concessions. Exploratory drilling in Abu Dhabi started
+            around 1950. Some of the first wells were dry, but by the late 1950s,
+            commercial quantities of oil had been discovered both offshore at Umm Shaif
+            and onshore in the Bab field. In 1962, Abu Dhabi exported its first cargo of
+            crude oil, marking the start of a new era.
+          </p>
+
+          <h3 style="margin-top:0.8rem;">Building a New State with Oil Revenues</h3>
+          <p>
+            Oil income provided the capital needed to modernise quickly. Under leaders
+            such as Sheikh Zayed bin Sultan Al Nahyan, revenue was channelled into:
+          </p>
+          <ul>
+            <li>Roads, ports and airports linking previously isolated communities.</li>
+            <li>Electricity, water and housing programmes that improved daily life.</li>
+            <li>Free education, scholarships and universities for citizens.</li>
+            <li>Hospitals, clinics and preventative healthcare.</li>
+          </ul>
+
+          <p style="margin-top:0.4rem;">
+            When the United Arab Emirates was formed in 1971, oil revenues helped the new
+            federation invest in common infrastructure while also supporting each emirate’s
+            development priorities. Over time, the UAE used oil as a springboard to build
+            a more diversified economy based on trade, logistics, finance, tourism,
+            technology and cultural initiatives.
+          </p>
+
+          <h3 style="margin-top:0.8rem;">Work and Technology in the Oil Fields</h3>
+          <p>
+            Development of onshore and offshore oil fields required large teams of
+            engineers, geologists, drillers, mechanics, safety specialists and support
+            staff. Many worked long shifts in harsh desert conditions or on offshore
+            platforms, far from city centres. Their efforts, alongside Emirati leadership
+            and planning, turned the UAE into a major energy producer.
+          </p>
+
+          <p style="margin-top:0.4rem;">
+            Over the decades, technology improved recovery rates and safety, while national
+            companies gained more control and expertise. At the same time, the UAE began
+            thinking about the long-term need to balance oil with renewable energy,
+            advanced industries and a knowledge-based economy.
+          </p>
+        </article>
+
+        <!-- Resources / videos / quiz column -->
+        <aside class="card">
+          <h3>Further Reading & Online Exhibitions</h3>
+          <p style="font-size:0.9rem;">
+            If you’d like to go deeper, these resources offer documents, photos and
+            narrative histories about oil in Abu Dhabi and the UAE:
+          </p>
+          <ul class="resource-list">
+            <li>
+              <a href="https://www.agda.ae/en/folder/abu-dhabi-oil-1922-2022-part-1" target="_blank" rel="noopener noreferrer">
+                Abu Dhabi Oil 1922–2022 (Part 1) – early concessions and first discoveries
+              </a>
+            </li>
+            <li>
+              <a href="https://www.agda.ae/en/folder/abu-dhabi-oil-1922-2022-part-2" target="_blank" rel="noopener noreferrer">
+                Abu Dhabi Oil 1922–2022 (Part 2) – from the 1970s to the present
+              </a>
+            </li>
+            <li>
+              <a href="https://emiratitimes.com/a-brief-history-of-oil-in-the-united-arab-emirates/" target="_blank" rel="noopener noreferrer">
+                “A Brief History of Oil in the United Arab Emirates”
+              </a>
+            </li>
+            <li>
+              <a href="https://uaepedia.net/uae-impact-of-oil-discovery/" target="_blank" rel="noopener noreferrer">
+                UAEpedia: How oil discovery transformed the UAE economy
+              </a>
+            </li>
+            <li>
+              <a href="https://www.agda.ae/en/exhibitions" target="_blank" rel="noopener noreferrer">
+                Arabian Gulf Digital Archive – Online exhibitions
+              </a>
+            </li>
+          </ul>
+
+          <h3 style="margin-top:1rem;">Short Videos</h3>
+          <p style="font-size:0.9rem;">
+            These videos can be used in class or for your own research:
+          </p>
+
+          <div class="video-card" style="margin-top:0.5rem;">
+            <iframe
+              src="https://www.youtube.com/embed/xM4eiftnNEs"
+              title="Story behind the first oil discovery in the UAE"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+            <div class="video-caption">
+              A narrative video about Abu Dhabi before oil and the story of the first discoveries.
+            </div>
+          </div>
+
+          <div class="video-card" style="margin-top:0.7rem;">
+            <iframe
+              src="https://www.youtube.com/embed/XBaqiNefdIs"
+              title="Farewell Arabia – Oil & Change in the Gulf"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+            <div class="video-caption">
+              Classic documentary footage showing how oil reshaped Gulf societies.
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:1rem; box-shadow:none; padding:0; border:none;">
+            <h3 style="margin-bottom:0.4rem;">Quick Knowledge Check 🧠</h3>
+            <div class="quiz" id="adult-quiz">
+              <div class="quiz-question" data-answer="b">
+                <p>1. Why were oil exports so important for the UAE?</p>
+                <label class="quiz-option">
+                  <input type="radio" name="aq1" value="a" /> They replaced all other work immediately.
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="aq1" value="b" /> They funded infrastructure, services and national development.
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="aq1" value="c" /> They only affected pearl diving.
+                </label>
+              </div>
+
+              <div class="quiz-question" data-answer="c">
+                <p>2. Which best describes work in the oil fields?</p>
+                <label class="quiz-option">
+                  <input type="radio" name="aq2" value="a" /> Mostly office work in city centres.
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="aq2" value="b" /> Completely effortless thanks to robots.
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="aq2" value="c" /> Technically demanding, often in harsh desert or offshore conditions.
+                </label>
+              </div>
+
+              <div class="quiz-question" data-answer="a">
+                <p>3. What is a key long-term goal for the UAE today?</p>
+                <label class="quiz-option">
+                  <input type="radio" name="aq3" value="a" /> Diversifying the economy and investing in renewable energy.
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="aq3" value="b" /> Cutting links with global trade.
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="aq3" value="c" /> Returning to a purely pearl-based economy.
+                </label>
+              </div>
+
+              <button class="btn btn-adults" id="adult-quiz-submit" style="margin-top:0.3rem;">
+                Check answers
+              </button>
+              <div id="adult-quiz-result" class="quiz-result"></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    This website template can be used for school projects about how oil changed the UAE.
+    You can adjust the text, links, and videos to match your lesson.
+  </footer>
+
+  <script>
+    // --- SECTION SWITCHING ---
+    const ageGate = document.getElementById("age-gate");
+    const kidsSection = document.getElementById("kids-section");
+    const adultsSection = document.getElementById("adults-section");
+
+    document.getElementById("kids-btn").addEventListener("click", () => showSection("kids"));
+    document.getElementById("adults-btn").addEventListener("click", () => showSection("adults"));
+    document.getElementById("back-from-kids").addEventListener("click", goHome);
+    document.getElementById("back-from-adults").addEventListener("click", goHome);
+
+    function showSection(which) {
+      ageGate.classList.add("hidden");
+      kidsSection.classList.add("hidden");
+      adultsSection.classList.add("hidden");
+      if (which === "kids") kidsSection.classList.remove("hidden");
+      if (which === "adults") adultsSection.classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function goHome() {
+      kidsSection.classList.add("hidden");
+      adultsSection.classList.add("hidden");
+      ageGate.classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    // --- KIDS QUIZ ---
+    const kidsQuizSubmit = document.getElementById("kids-quiz-submit");
+    const kidsQuizResult = document.getElementById("kids-quiz-result");
+
+    kidsQuizSubmit.addEventListener("click", () => {
+      const root = document.getElementById("kids-quiz");
+      const questions = root.querySelectorAll(".quiz-question");
+      let score = 0;
+      let total = questions.length;
+
+      questions.forEach((q) => {
+        const correct = q.getAttribute("data-answer");
+        const chosen = q.querySelector("input[type='radio']:checked");
+        if (chosen && chosen.value === correct) score++;
+      });
+
+      const percent = Math.round((score / total) * 100);
+      if (percent === 100) {
+        kidsQuizResult.textContent = "Perfect! You got all questions correct. 🎉";
+      } else if (percent >= 60) {
+        kidsQuizResult.textContent = `Nice work! You scored ${score} out of ${total}.`;
+      } else {
+        kidsQuizResult.textContent = `You scored ${score} out of ${total}. Try again and beat your score!`;
+      }
+    });
+
+    // --- ADULT QUIZ ---
+    const adultQuizSubmit = document.getElementById("adult-quiz-submit");
+    const adultQuizResult = document.getElementById("adult-quiz-result");
+
+    adultQuizSubmit.addEventListener("click", () => {
+      const root = document.getElementById("adult-quiz");
+      const questions = root.querySelectorAll(".quiz-question");
+      let score = 0;
+      let total = questions.length;
+
+      questions.forEach((q) => {
+        const correct = q.getAttribute("data-answer");
+        const chosen = q.querySelector("input[type='radio']:checked");
+        if (chosen && chosen.value === correct) score++;
+      });
+
+      const percent = Math.round((score / total) * 100);
+      if (percent === 100) {
+        adultQuizResult.textContent = "Excellent! Full score. 🎉";
+      } else if (percent >= 60) {
+        adultQuizResult.textContent = `Good job! You scored ${score} out of ${total}.`;
+      } else {
+        adultQuizResult.textContent = `You scored ${score} out of ${total}. You can review the text and try again.`;
+      }
+    });
+
+    // --- TIMELINE GAME (DRAG & DROP) ---
+    const timelineList = document.getElementById("timeline-list");
+    const timelineItems = timelineList.querySelectorAll("li");
+    const timelineMessage = document.getElementById("timeline-message");
+    let dragSrcEl = null;
+
+    timelineItems.forEach((item) => {
+      item.addEventListener("dragstart", handleDragStart);
+      item.addEventListener("dragover", handleDragOver);
+      item.addEventListener("drop", handleDrop);
+      item.addEventListener("dragend", handleDragEnd);
+    });
+
+    function handleDragStart(e) {
+      dragSrcEl = this;
+      this.classList.add("dragging");
+      e.dataTransfer.effectAllowed = "move";
+      e.dataTransfer.setData("text/plain", "");
+    }
+
+    function handleDragOver(e) {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = "move";
+    }
+
+    function handleDrop(e) {
+      e.preventDefault();
+      if (dragSrcEl && dragSrcEl !== this) {
+        const list = this.parentNode;
+        const nodes = Array.from(list.children);
+        const srcIndex = nodes.indexOf(dragSrcEl);
+        const destIndex = nodes.indexOf(this);
+        if (srcIndex < destIndex) {
+          list.insertBefore(dragSrcEl, this.nextSibling);
+        } else {
+          list.insertBefore(dragSrcEl, this);
+        }
+      }
+    }
+
+    function handleDragEnd() {
+      this.classList.remove("dragging");
+      dragSrcEl = null;
+    }
+
+    document.getElementById("check-timeline").addEventListener("click", () => {
+      const items = timelineList.querySelectorAll("li");
+      let correct = true;
+      let previous = 0;
+
+      items.forEach((item) => {
+        const order = parseInt(item.getAttribute("data-order"), 10);
+        if (order < previous) correct = false;
+        previous = order;
+      });
+
+      if (correct) {
+        timelineMessage.textContent = "Great job! Your timeline is correct. 🎉";
+        timelineMessage.style.color = "green";
+      } else {
+        timelineMessage.textContent = "Not yet… try moving the cards again!";
+        timelineMessage.style.color = "darkred";
+      }
+    });
+
+    // --- FUN FACTS (tap to flip) ---
+    const funFacts = document.querySelectorAll(".fun-fact");
+    funFacts.forEach((box) => {
+      const front = box.getAttribute("data-front");
+      const back = box.getAttribute("data-back");
+      let showingFront = true;
+      box.textContent = front + " – tap to reveal";
+
+      box.addEventListener("click", () => {
+        if (showingFront) {
+          box.textContent = back;
+        } else {
+          box.textContent = front + " – tap to reveal";
+        }
+        showingFront = !showingFront;
+      });
+    });
+  </script>
+</body>
+</html>
